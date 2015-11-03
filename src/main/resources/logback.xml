@@ -1,0 +1,37 @@
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern> %d{HH:mm:ss.SSS} %level - %logger [%thread] - %message%n%xException</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>application.log</file>
+        <encoder>
+            <pattern>%date [%level] from %logger in %thread - %message%n%xException</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNCFILE" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="FILE" />
+    </appender>
+
+    <appender name="ASYNCSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="STDOUT" />
+    </appender>
+
+    <logger name="play" level="INFO" />
+
+    <logger name="com.typesafe" level="INFO" />
+    <logger name="com.ning.http.client" level="DEBUG" />
+    <logger name="org.jboss.netty.channel" level="TRACE" />
+    <logger name="org.jboss.netty.channel.socket.nio" level="TRACE" />
+    <logger name="org.jboss.netty.handler.logging.LoggingHandler" level="DEBUG" />
+
+    <root level="INFO">
+        <appender-ref ref="ASYNCSTDOUT" />
+        <appender-ref ref="ASYNCFILE" />
+    </root>
+
+</configuration>
